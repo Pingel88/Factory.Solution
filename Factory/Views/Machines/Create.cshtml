@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Name)
-    @Html.TextBoxFor(model => model.Name)
+    @Html.TextBoxFor(model => model.Name, new { required="required", autocomplete="off"})
 
     <input type="submit" value="Add machine" class="btn btn-outline-success">
 }
