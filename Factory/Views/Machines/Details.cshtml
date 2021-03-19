@@ -5,12 +5,14 @@
 @using Factory.Models
 @model Factory.Models.Machine
 
-<h2>@Html.DisplayFor(model => model.Name) details</h2>
+<h2>Machine - @Html.DisplayFor(model => model.Name)</h2>
 
 <hr>
+<input type="button" class="btn btn-outline-success" value="Add certified engineer" onclick="location.href='@Url.Action("AddEngineer", new { id = Model.MachineId })'">
 <input type="button" class="btn btn-outline-warning" value="Edit machine" onclick="location.href='@Url.Action("Edit", new { id = Model.MachineId })'">
 <input type="button" class="btn btn-outline-danger" value="Delete machine" onclick="location.href='@Url.Action("Delete", new { id = Model.MachineId })'">
 <input type="button" class="btn btn-outline-primary" value="Back to list" onclick="location.href='@Url.Action("Index")'">
+<input type="button" class="btn btn-outline-primary" value="Home" onclick="location.href='@Url.Action("Index", "Home")'">
 <hr>
 
 @if(@Model.JoinEntities.Count == 0)
@@ -24,6 +26,11 @@ else
   @foreach(EngineerMachine join in Model.JoinEntities)
   {
     <li>@Html.ActionLink($"Engineer {join.Engineer.Name}", "Details", "Engineers", new { id = join.Engineer.EngineerId })</li>
+    @using (Html.BeginForm("DeleteEngineer", "Machines"))
+    {
+      @Html.Hidden("joinId", @join.EngineerMachineId)
+      <input type="submit" class="btn btn-outline-danger" value="Delete">
+    }
   }
   </ul>
 }
