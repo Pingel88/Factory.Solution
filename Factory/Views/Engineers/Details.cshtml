@@ -5,25 +5,32 @@
 @using Factory.Models
 @model Factory.Models.Engineer
 
-<h2>Engineer @Html.DisplayFor(model => model.Name) details</h2>
+<h2>Engineer - @Html.DisplayFor(model => model.Name)</h2>
 
 <hr>
+<input type="button" class="btn btn-outline-success" value="Add machine certification" onclick="location.href='@Url.Action("AddMachine", new { id = Model.EngineerId })'">
 <input type="button" class="btn btn-outline-warning" value="Edit engineer" onclick="location.href='@Url.Action("Edit", new { id = Model.EngineerId })'">
 <input type="button" class="btn btn-outline-danger" value="Delete engineer" onclick="location.href='@Url.Action("Delete", new { id = Model.EngineerId })'">
 <input type="button" class="btn btn-outline-primary" value="Back to list" onclick="location.href='@Url.Action("Index")'">
+<input type="button" class="btn btn-outline-primary" value="Home" onclick="location.href='@Url.Action("Index", "Home")'">
 <hr>
 
 @if(@Model.JoinEntities.Count == 0)
 {
-  <p>Engineer @Html.DisplayFor(model => model.Name) is not certified to repair any machines.</p>
+  <p>@Html.DisplayFor(model => model.Name) is not certified to repair any machines.</p>
 }
 else
 {
-  <h4>Engineer @Html.DisplayFor(model => model.Name) is certified to repair:</h4>
+  <h4>@Html.DisplayFor(model => model.Name) is certified to repair:</h4>
   <ul>
   @foreach(EngineerMachine join in Model.JoinEntities)
   {
     <li>@Html.ActionLink($"{join.Machine.Name}", "Details", "Machines", new { id = join.Machine.MachineId })</li>
+    @using (Html.BeginForm("DeleteMachine", "Engineers"))
+    {
+      @Html.Hidden("joinId", @join.EngineerMachineId)
+      <input type="submit" class="btn btn-outline-danger" value="Delete">
+    }
   }
   </ul>
 }
