@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models;
+@model Factory.Models.Engineer;
+
+<h2>Engineer @Html.DisplayFor(model => model.Name) details</h2>
+
+<hr>
+<input type="button" class="btn btn-outline-warning" value="Edit engineer" onclick="location.href='@Url.Action("Edit", new { id = Model.EngineerId })'">
+<input type="button" class="btn btn-outline-danger" value="Delete engineer" onclick="location.href='@Url.Action("Delete", new { id = Model.EngineerId })'">
+<input type="button" class="btn btn-outline-primary" value="Back to list" onclick="location.href='@Url.Action("Index")'">
+<hr>
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>Engineer @Html.DisplayFor(model => model.Name) is not certified to repair any machines.</p>
+}
+else
+{
+  <h4>Engineer @Html.DisplayFor(model => model.Name) is certified to repair:</h4>
+  <ul>
+  @foreach(EngineerMachine join in Model.JoinEntities)
+  {
+    <li>@Html.ActionLink($"{join.Machine.Name}", "Details", "Machines", new { id = join.Machine.MachineId })</li>
+  }
+  </ul>
+}
