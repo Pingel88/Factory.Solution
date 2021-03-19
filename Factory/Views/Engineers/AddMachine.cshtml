@@ -19,4 +19,4 @@
 }
 
 <input type="button" class="btn btn-outline-primary" value="Home" onclick="location.href='@Url.Action("Index", "Home")'">
-<input type="button" class="btn btn-outline-primary" value="Back to list" onclick="location.href='@Url.Action("Index")'">
+<input type="button" class="btn btn-outline-primary" value="Back to details" onclick="location.href='@Url.Action("Details", new { id = Model.EngineerId })'">
