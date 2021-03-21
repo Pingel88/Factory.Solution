@@ -11,7 +11,6 @@ namespace Factory.Models
 
     public int MachineId { get; set; }
     public string Name { get; set; }
-    //Set might be needed below
     public virtual ICollection<EngineerMachine> JoinEntities { get; }
   }
 }
