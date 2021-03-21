@@ -2,7 +2,40 @@
   Layout = "_Layout";
 }
 
+@using Factory.Models
+@model List<Factory.Models.Engineer>
+
 <h1>Dr. Sillystringz's Engineer and Machinery Manager</h1>
 
-<input type="button" class="btn btn-outline-primary" value="Engineers" onclick="location.href='@Url.Action("Index", "Engineers")'">
-<input type="button" class="btn btn-outline-primary" value="Machines" onclick="location.href='@Url.Action("Index", "Machines")'">
+<input type="button" class="btn btn-outline-primary" value="All engineers" onclick="location.href='@Url.Action("Index", "Engineers")'">
+<input type="button" class="btn btn-outline-primary" value="All machines" onclick="location.href='@Url.Action("Index", "Machines")'">
+
+@if (@Model.Count == 0)
+{
+  <h5>Engineers and their repair certificications will populate here as engineers are added</h5>
+}
+else
+{
+  <h3>All Engineers:</h3>
+  @foreach (Engineer engineer in Model)
+  {
+      <h4>@engineer.Name</h4>
+      @if (engineer.JoinEntities.Count == 0)
+      {
+        <p>Is certified to repair:</p>
+        <ul>
+          <li>None</li>
+        </ul>
+      }
+      else
+      {
+        <p>Is certified to repair:</p>
+        <ul>
+        @foreach(EngineerMachine join in engineer.JoinEntities)
+        {
+          <li>@join.Machine.Name</li>
+        }
+        </ul>
+      }
+  }
+}
