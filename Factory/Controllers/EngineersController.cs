@@ -88,16 +88,17 @@ namespace Factory.Controllers
         _db.EngineerMachine.Add(new EngineerMachine() { MachineId = MachineId, EngineerId = engineer.EngineerId });
       }
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", "Engineers", new { id = engineer.EngineerId});
     }
 
     [HttpPost]
     public ActionResult DeleteMachine(int joinId)
     {
       EngineerMachine joinEntry = _db.EngineerMachine.FirstOrDefault(entry => entry.EngineerMachineId == joinId);
+      int engineerId = joinEntry.EngineerId;
       _db.EngineerMachine.Remove(joinEntry);
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", "Engineers", new { id = engineerId});
     }
   }
 }
