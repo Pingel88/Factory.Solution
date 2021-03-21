@@ -14,9 +14,9 @@ ___
 ## *Setup/Installation instructions*
 ### *From the web*
 * Go to the GitHub repository for this project: [https://github.com/Pingel88/Factory.Solution.git](https://github.com/Pingel88/Factory.Solution.git).
-* At the top of the repository, click <img src="https://i.imgur.com/Ej9Dphm.png" alt="Code Button" height="20" align="center" /> then select "Download ZIP".
+* At the top of the repository, click <img src="https://i.imgur.com/Ej9Dphm.png" alt="Code Button" height="20" align="center"> then select "Download ZIP".
 
-  <img src="https://i.imgur.com/tZKvGne.gif" alt="download zip gif" height="200"/>
+  <img src="https://i.imgur.com/tZKvGne.gif" alt="download zip gif" height="200">
 * Unzip the file, navigate to the **'Factory'** folder to view code.
 ### *From the terminal*
 * Clone my repository from GitHub using `git clone https://github.com/Pingel88/Factory.Solution.git` in your terminal or GitBash
@@ -28,18 +28,14 @@ To run this project locally you will need to have .NET Core and MySQL, follow al
 
 ###  *View website*
 A GitHub page is not available for this project. To view functionality in your browser:
-* Import **mike_pingel.sql** database
-  * Open MySQL Workbench and select your local instance
-  * Select `Data Import/Restore` on the Administration tab in the Navigator
-  * Select `Import from Self-Contained File` and navigate to and select the **mike_pingel.sql** file you cloned/downloaded with the project
-  * Select `New...` under Default Schema to be Imported To
-  * Enter `mike_pingel` and click OK
-  * Click on `Start Import` to import the database
-  * Close MySQL Workbench if desired
+* Create a new database using migration through Entity
+  * Navigate to the **'Factory'** folder in your terminal
+  * Enter `dotnet ef migrations add Initial`
+  * Enter `dotnet ef database update`
 * Rename **EDITMEappsettings.json** in the **'Factory'** folder to **appsettings.json**
 * Open **appsettings.json** in VS Code or Notepad
   * Enter your password in the DefaultConnection string (replacing `[PASSWORD]`) and save the file
-* Navigate to the **'Factory'** folder in your terminal
+* If not already there, navigate to the **'Factory'** folder in your terminal
 * Enter `dotnet run`
 * Open your browser and visit http://localhost:5000
 
@@ -55,7 +51,7 @@ A GitHub page is not available for this project. To view functionality in your b
 * Git & GitHub
 
 ## *Known bugs*
-* No known bugs
+* When adding a machine certification to an engineer or vice versa, redundant engineer-machine relationships can be created.
 
 ## Contact Information
 [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](mailto:mdpingel+github@gmail.com?subject=[GitHub]Epicodus%20Project%20-%20Factory.Solution)
