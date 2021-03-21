@@ -5,7 +5,7 @@
 @using Factory.Models
 @model Factory.Models.Engineer
 
-<h2>Engineer - @Html.DisplayFor(model => model.Name)</h2>
+<h1>Engineer - @Html.DisplayFor(model => model.Name)</h1>
 
 <hr>
 <input type="button" class="btn btn-outline-success" value="Add machine certification" onclick="location.href='@Url.Action("AddMachine", new { id = Model.EngineerId })'">
@@ -21,15 +21,15 @@
 }
 else
 {
-  <h4>@Html.DisplayFor(model => model.Name) is certified to repair:</h4>
+  <h3>@Html.DisplayFor(model => model.Name) is certified to repair:</h3>
   <ul>
   @foreach(EngineerMachine join in Model.JoinEntities)
   {
-    <li>@Html.ActionLink($"{join.Machine.Name}", "Details", "Machines", new { id = join.Machine.MachineId })</li>
+    <li><h4>@Html.ActionLink($"{join.Machine.Name}", "Details", "Machines", new { id = join.Machine.MachineId })</h4></li>
     @using (Html.BeginForm("DeleteMachine", "Engineers"))
     {
       @Html.Hidden("joinId", @join.EngineerMachineId)
-      <input type="submit" class="btn btn-outline-danger" value="Delete">
+      <input type="submit" class="btn btn-outline-danger btn-sm" value="Remove certification">
     }
   }
   </ul>
